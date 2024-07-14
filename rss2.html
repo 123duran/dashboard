@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exemplo de Leitura de RSS com jQuery</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    var rssFeedUrl = 'https://anchor.fm/s/e692ad4c/podcast/rss'; // URL do feed RSS
+
+    $.ajax({
+        url: rssFeedUrl,
+        dataType: 'xml',
+        success: function(data){
+            $(data).find('item').each(function(){
+                var title = $(this).find('title').text();
+                var description = $(this).find('description').text();
+                var link = $(this).find('link').text();
+                var pubDate = $(this).find('pubDate').text();
+                var enclosureUrl = $(this).find('enclosure').attr('url');
+
+                var itemHTML = '<div class="rss-item">';
+                itemHTML += '<h3><a href="' + link + '" target="_blank">' + title + '</a></h3>';
+                itemHTML += '<p>' + description + '</p>';
+                itemHTML += '<p>Publicado em: ' + pubDate + '</p>';
+                itemHTML += '<audio controls><source src="' + enclosureUrl + '" type="audio/mpeg"></audio>';
+                itemHTML += '</div>';
+
+                $('#rss-container').append(itemHTML);
+            });
+        },
+        error: function(){
+            console.log('Erro ao carregar o feed RSS.');
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div id="rss-container">
+    <!-- Os itens do RSS serão carregados aqui -->
+</div>
+</body>
+</html>

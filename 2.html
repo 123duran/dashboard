@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Value Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/demo/script2.js"></script> <!-- Assuming your JavaScript is in script.js -->
+    <style>
+        /* Optional: Some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .bitcoin-calculator {
+            margin-bottom: 10px;
+        }
+        .result {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bitcoin Value Calculator</h1>
+    <div>
+        Current Bitcoin Price in dollars: <span id="bitcoin-price" class="result">Loading...</span>
+    </div>
+    <div>
+        0.00387384        
+    </div>
+    <div class="bitcoin-calculator">
+        <label for="bitcoin-input">Enter Bitcoin Amount:</label>
+        <input type="text" id="bitcoin-input" placeholder="0.00387384">
+        <button onclick="calculateBitcoinValue()">Calculate Value</button>
+    </div>
+    <div>
+        <p>Bitcoin Value in Reais: <span id="bitcoin-value" class="result">---</span></p>
+    </div>
+</body>
+</html>
