@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Magkicando</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+
+        </ul>
+        <!-- End of Sidebar -->
+        <img src="https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/production/podcast_uploaded_nologo400/3879043/3879043-1656943503542-9cb5c27ec4d1e.jpg" alt="Logo podcast" >
+<script>
+$(document).ready(function(){
+    var rssFeedUrl = 'https://anchor.fm/s/17b789ac/podcast/rss'; // URL do feed RSS
+
+    $.ajax({
+        url: rssFeedUrl,
+        dataType: 'xml',
+        success: function(data){
+            $(data).find('item').each(function(){
+                var title = $(this).find('title').text();
+                var link = $(this).find('link').text();
+                var pubDate = $(this).find('pubDate').text();
+                var enclosureUrl = $(this).find('enclosure').attr('url');
+
+                var itemHTML = '<div class="rss-item">';
+                itemHTML += '<h3><a href="' + link + '" target="_blank">' + title + '</a></h3>';
+                itemHTML += '<p>Publicado em: ' + pubDate + '</p>';
+                itemHTML += '<audio controls><source src="' + enclosureUrl + '" type="audio/mpeg"></audio>';
+                itemHTML += '</div>';
+
+                $('#rss-container').append(itemHTML);
+            });
+        },
+        error: function(){
+            console.log('Erro ao carregar o feed RSS.');
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div id="rss-container">
+    <!-- Os itens do RSS serão carregados aqui -->
+</div>
+</body>
+</html>
