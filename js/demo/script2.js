@@ -138,11 +138,68 @@ function calculateEthereumValue() {
     });
 }
 
+// Function to fetch current Solana price
+function getSolanaPriceReais(callback) {
+    // API endpoint for Bitcoin price in USD (you can change to other currencies)
+    var apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=BRL';
+
+    // Making an AJAX request to the API
+    $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        success: function(data) {
+            // On success, extract solana price from the response
+            var solanaPrice = data.solana.brl;
+            
+            // Invoke the callback function with the Solana price as argument
+            callback(solanaPrice);
+        },
+        error: function() {
+            // Error handling
+            callback(null); // Pass null if there's an error
+        }
+    });
+}
+
+// Function to calculate Solana value in dollars based on input amount
+function calculateSolanaValue() {
+    // Get input value from textbox
+    var solanaAmount = parseFloat($('#solana-input').val());
+
+    // Validate input
+    if (isNaN(solanaAmount) || solanaAmount <= 0) {
+        $('#solana-value').text('Invalid input');
+        return;
+    }
+
+    getSolanaPriceReais(function(price) {
+        if (price !== null) {
+            // Calculate value in dollars
+            var solanaValueInDollars = solanaAmount * price;
+
+            // Format to 2 decimal places
+            var formattedValue = '$' + solanaValueInDollars.toFixed(2);
+
+            // Update the text of the element with id="bitcoin-value"
+            $('#solana-value').text(formattedValue);
+        } else {
+            // Handle error fetching data
+            $('#solana-value').text('Error fetching data');
+        }
+    });
+}
+
+
+
 // Document ready function to initialize
 $(document).ready(function() {
     // Display current Bitcoin price initially when the page loads
     displayBitcoinPrice();
+    $('#bitcoin-input').val( 0.00387384 );
+    $('#ethereum-input').val( 0.03835377 );
+    $('#solana-input').val( 0.15052336 );
+    calculateEthereumValue();
+    calculateBitcoinValue();
+    calculateSolanaValue();
 
-    // Optionally, you can set up an interval to update the price periodically (e.g., every minute)
-    // setInterval(displayBitcoinPrice, 60000); // 60000 milliseconds = 1 minute
 });
