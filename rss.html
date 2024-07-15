@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Exemplo de Leitura de RSS com jQuery</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/demo/rss.js"></script> <!-- Assuming your JavaScript is in script.js -->
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -28,39 +29,24 @@
 
         </ul>
         <!-- End of Sidebar -->
-        <img src="https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo400/38583723/38583723-1708631699370-5f70275c3ee88.jpg" alt="Logo podcast" >
-<script>
-$(document).ready(function(){
-    var rssFeedUrl = 'https://anchor.fm/s/e692ad4c/podcast/rss'; // URL do feed RSS
-
-    $.ajax({
-        url: rssFeedUrl,
-        dataType: 'xml',
-        success: function(data){
-            $(data).find('item').each(function(){
-                var title = $(this).find('title').text();
-                var link = $(this).find('link').text();
-                var pubDate = $(this).find('pubDate').text();
-                var enclosureUrl = $(this).find('enclosure').attr('url');
-
-                var itemHTML = '<div class="rss-item">';
-                itemHTML += '<h3><a href="' + link + '" target="_blank">' + title + '</a></h3>';
-                itemHTML += '<p>Publicado em: ' + pubDate + '</p>';
-                itemHTML += '<audio controls><source src="' + enclosureUrl + '" type="audio/mpeg"></audio>';
-                itemHTML += '</div>';
-
-                $('#rss-container').append(itemHTML);
-            });
-        },
-        error: function(){
-            console.log('Erro ao carregar o feed RSS.');
-        }
-    });
-});
-</script>
+           
 </head>
 <body>
-<div id="rss-container">
+    <img src="https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/staging/podcast_uploaded_nologo400/38583723/38583723-1708631699370-5f70275c3ee88.jpg" alt="Logo podcast" >
+    <div>
+        <h1>Carregar o feed</h1>
+        <div class="feed-loader">
+            <label for="feed-input">Enter RSS feed to fetch, eg: https://anchor.fm/s/e692ad4c/podcast/rss</label>
+            <input type="text" id="feed-input" placeholder="https://anchor.fm/s/e692ad4c/podcast/rss">            
+        </div>
+    <div>
+            <label for="episodes">Number of episodes</label>
+            <input type="text" id="episodes-input" placeholder="5"></div>
+        </div>
+    <div>
+        <button class="btn-primary" onclick="getRSSFeed()">Fetch RSS Feed</button>
+    </div> 
+    <div id="rss-container">
     <!-- Os itens do RSS serão carregados aqui -->
 </div>
 </body>

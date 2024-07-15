@@ -50,16 +50,45 @@
         </div>
     </div>
 
-    <div>
-        <h1>Solana Value Calculator</h1>
-        <div class="solana-calculator">
-            <label for="solana-input">Enter Solana Amount:</label>
-            <input type="text" id="solana-input" placeholder="0.15052336">
-            <button class="btn-primary" onclick="calculateSolanaValue()">Calculate Value</button>
-        </div>
-        <div>
-            <p>Solana Value in Reais: <span id="solana-value" class="result">---</span></p>
-        </div>
-    </div>
+                        <!-- Solana -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Solana</div>
+                                            <div>
+                                                Current Solana Price in dollars: <span id="solana-price" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Somatoria -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Current total cryptos in reais:</div>
+                                            <div>
+                                                R$: <span id="total-price" class="h5 mb-0 font-weight-bold text-gray-800">Loading...</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 </body>
 </html>
