@@ -130,12 +130,45 @@ function getEthereumPrice(callback) {
     });
 }
 
+function getSolanaPrice(callback) {
+    // API endpoint for Ethereum price in USD (you can change to other currencies)
+    var apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd';
+
+    // Making an AJAX request to the API
+    $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        success: function(data) {
+            // On success, extract Ethereum price from the response
+            var solanaPrice = data.ethereum.usd;
+            
+            // Format price to 2 decimal places
+            var formattedPrice = 'U$' + solanaPrice.toFixed(2);
+
+            // Invoke the callback function with the formatted price as argument
+            callback(formattedPrice);
+        },
+        error: function() {
+            // Error handling
+            callback('Error fetching data');
+        }
+    });
+}
+
 
 // Function to update Ethereum price on the webpage
-function updateEthereumPrice() {
+function displayEthereumPrice() {
     getEthereumPrice(function(price) {
         // Update the text of the element with id="ethereum-price"
         $('#ethereum-price').text(price);
+    });
+}
+
+// Function to update Ethereum price on the webpage
+function displaySolanaPrice() {
+    getSolanaPrice(function(price) {
+        // Update the text of the element with id="ethereum-price"
+        $('#solana-price').text(price);
     });
 }
 
@@ -166,6 +199,15 @@ function calculateBitcoinValue() {
             $('#bitcoin-value').text('Error fetching data');
         }
     });
+}
+
+function getTotalCryptos(){
+    btcValueReais =  $('#bitcoin-value').text;
+    ethValueReais =  $('#ethereum-value').text;
+    solValueReais =  $('#bitcoin-value').text;
+
+    totalCrypto = btcValueReais + ethValueReais + solValueReais;
+    $('#total-value').text('totalCrypto');
 }
 
 // Function to calculate Etheremum value in dollars based on input amount
@@ -281,10 +323,12 @@ function fillInputs(){
 // Update Bitcoin price initially when the page loads
 $(document).ready(function() {
     displayBitcoinPrice();
-    updateEthereumPrice();
+    displayEthereumPrice();
+    displaySolanaPrice();
     //Just because I want to know how much my BTC, ETH and SOL is worth ;)    
     fillInputs();
     calculateEthereumValue();
     calculateBitcoinValue();
     calculateSolanaValue();
+    getTotalCryptos();
 });
