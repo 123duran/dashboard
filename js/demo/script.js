@@ -140,7 +140,7 @@ function getSolanaPrice(callback) {
         type: 'GET',
         success: function(data) {
             // On success, extract Ethereum price from the response
-            var solanaPrice = data.ethereum.usd;
+            var solanaPrice = data.solana.usd;
             
             // Format price to 2 decimal places
             var formattedPrice = 'U$' + solanaPrice.toFixed(2);
