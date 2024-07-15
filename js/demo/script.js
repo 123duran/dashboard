@@ -168,11 +168,66 @@ function calculateBitcoinValue() {
     });
 }
 
+// Function to calculate Etheremum value in dollars based on input amount
+function calculateEthereumValue() {
+    // Get input value from textbox
+    var ethereumAmount = parseFloat($('#ethereum-input').val());
+
+    // Validate input
+    if (isNaN(ethereumAmount) || ethereumAmount <= 0) {
+        $('#ethereum-value').text('Invalid input');
+        return;
+    }
+
+    getEthereumPriceReais(function(price) {
+        if (price !== null) {
+            // Calculate value in dollars
+            var ethereumValueInDollars = ethereumAmount * price;
+
+            // Format to 2 decimal places
+            var formattedValue = '$' + ethereumValueInDollars.toFixed(2);
+
+            // Update the text of the element with id="bitcoin-value"
+            $('#ethereum-value').text(formattedValue);
+        } else {
+            // Handle error fetching data
+            $('#ethereum-value').text('Error fetching data');
+        }
+    });
+}
+
+
+// Function to fetch current Etherem price
+function getEthereumPriceReais(callback) {
+    // API endpoint for Bitcoin price in USD (you can change to other currencies)
+    var apiUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=BRL';
+
+    // Making an AJAX request to the API
+    $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        success: function(data) {
+            // On success, extract ethereum price from the response
+            var ethereumPrice = data.ethereum.brl;
+            
+            // Invoke the callback function with the Ethereum price as argument
+            callback(ethereumPrice);
+        },
+        error: function() {
+            // Error handling
+            callback(null); // Pass null if there's an error
+        }
+    });
+}
+
+
 // Update Bitcoin price initially when the page loads
 $(document).ready(function() {
     displayBitcoinPrice();
     updateEthereumPrice();
-    //Just because I want to know how much my BTC is worth ;)
+    //Just because I want to know how much my BTC  and ETH is worth ;)
     $('#bitcoin-input').val( 0.00387384 );
-
+    $('#ethereum-input').val( 0.03835377 );
+    calculateEthereumValue();
+    calculateBitcoinValue();
 });
