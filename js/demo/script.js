@@ -202,12 +202,21 @@ function calculateBitcoinValue() {
 }
 
 function getTotalCryptos(){
-    btcValueReais =  $('#bitcoin-value').text;
-    ethValueReais =  $('#ethereum-value').text;
-    solValueReais =  $('#bitcoin-value').text;
+    
+    btcValueReais = +$("span[name='bitcoin-value']").val();
+    console.log("btcValueReais: " + btcValueReais );
+    ethValueReais =  +$("span[name='ethereum-value']").val();
+    solValueReais =  +$("span[name='solana-value']").val();
 
     totalCrypto = btcValueReais + ethValueReais + solValueReais;
-    $('#total-value').text('totalCrypto');
+    
+    // Validate input
+    if (isNaN(totalCrypto) || totalCrypto <= 0) {
+        $('#total-value').text('Error');
+        return;
+    }
+    
+    $('#total-value').text(totalCrypto);
 }
 
 // Function to calculate Etheremum value in dollars based on input amount
