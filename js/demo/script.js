@@ -67,7 +67,6 @@ function displayBitcoinPrice() {
 function calculateBitcoinValue() {
     // Get input value from textbox
     var bitcoinAmount = parseFloat($('#bitcoin-input').val());
-    console.log(bitcoinAmount);
 
     // Validate input
     if (isNaN(bitcoinAmount) || bitcoinAmount <= 0) {
@@ -90,8 +89,6 @@ function calculateBitcoinValue() {
             $('#bitcoin-value').text('Error fetching data');
         }
     });
-
-
 }
 
 // Function to update Bitcoin price on the webpage
@@ -203,7 +200,6 @@ function calculateBitcoinValue() {
 function getTotalCryptos(){
     
     btcValueReais = +$("span[name='bitcoin-value']").val();
-    console.log("btcValueReais: " + btcValueReais );
     ethValueReais =  +$("span[name='ethereum-value']").val();
     solValueReais =  +$("span[name='solana-value']").val();
 
