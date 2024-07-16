@@ -37,6 +37,24 @@ function fillInputs(){
 }
 
 
+function getLatestEpisode(feed){
+    $.ajax({
+        url: feed,
+        dataType: 'xml',
+        success: function(data){
+           
+            var items = $(data).find('item');
+            console.log("items: " + items);
+            console.log("first: " + $(items[0]).find('title').text());
+
+            return $(items[0]).find('title').text();
+        },
+        error: function(){
+            console.log('Erro ao carregar o feed RSS.');
+        }
+    });
+}
+
 $(document).ready(function() {
     fillInputs();
 });
