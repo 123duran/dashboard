@@ -324,9 +324,9 @@ function calculateSolanaValue() {
 }
 
 function fillInputs(){
-    $('#bitcoin-input').val( 0.00387384 );
-    $('#ethereum-input').val( 0.03835377 );
-    $('#solana-input').val( 0.15052336 );        
+    $('#bitcoin-input').val( 0.00430484 );
+    $('#ethereum-input').val( 0.04505618 );
+    $('#solana-input').val( 0.179649 );        
 }
 
 // Update Bitcoin price initially when the page loads
