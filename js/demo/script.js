@@ -12,7 +12,6 @@ function getBitcoinPrice(callback) {
             var bitcoinPrice = data.bitcoin.usd;
             
             // Format price to 2 decimal places
-            // var formattedPrice = 'U$' + bitcoinPrice.toFixed(2);
             var formattedPrice = 'U$' + bitcoinPrice.toFixed(2);
 
             // Invoke the callback function with the formatted price as argument
